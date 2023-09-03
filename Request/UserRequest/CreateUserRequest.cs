@@ -3,6 +3,7 @@ namespace ChatChirp.Request.UserRequest;
 public record CreateUserRequest(
        string Name,
        string Email,
+       string HashedPassword,
        int Points,
        string ScreenName,
        string Description,
@@ -19,3 +20,4 @@ public record CreateUserRequest(
        bool DefaultProfile,
        bool DefaultProfileImage
    );
+

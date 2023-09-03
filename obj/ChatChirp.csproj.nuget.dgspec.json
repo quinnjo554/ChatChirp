@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj": {}
+    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj": {
+    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
+        "projectUniqueName": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj",
         "projectName": "ChatChirp",
-        "projectPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
+        "projectPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj",
         "packagesPath": "C:\\Users\\quinn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\obj\\",
+        "outputPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

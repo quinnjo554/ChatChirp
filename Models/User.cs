@@ -4,6 +4,7 @@ public class User
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
+    public string HasedPassword { get; set; }
     public int Points { get; set; }
     public string ScreenName { get; set; }
     public string? Description { get; set; }
@@ -22,6 +23,7 @@ public class User
     Guid id,
     string name,
     string email,
+    string hasedPassword,
     int points,
     string screenName,
     string description,
@@ -41,6 +43,7 @@ public class User
         Id = id;
         Name = name;
         Email = email;
+        HasedPassword = hasedPassword;
         Points = points;
         ScreenName = screenName;
         Description = description;
