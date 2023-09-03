@@ -19,18 +19,22 @@ public class UserController : ControllerBase
     }
 
 
-    [HttpGet(Name = "getAllUsers")]
+    [HttpGet(Name = "GetAllUsers")]
     public async Task<IActionResult> Get()
     {
         var user = new User()
         {
-            Name = "",
-            Email = "",
+            Name = "Quinn",
+            Email = "q@gmail.com",
             Points = 32,
         };
         _context.Add(user);
         await _context.SaveChangesAsync();
+
+        // Retrieve users using the ToListAsync method
         var allUsers = await _context.Users.ToListAsync();
+
         return Ok(allUsers);
     }
+
 }

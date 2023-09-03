@@ -17,5 +17,9 @@ public class User
 
     public User()
     {
+        Id = Guid.Empty;
+        Email = "";
+        Points = 0;
+        Name = "";
     }
 }
