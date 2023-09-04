@@ -4,6 +4,7 @@ public record UpdateUserRequest(
        Guid Id,
        string Name,
        string Email,
+       string HashedPassword,
        int Points,
        string ScreenName,
        string Description,

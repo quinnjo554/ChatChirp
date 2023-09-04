@@ -1,10 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
 namespace ChatChirp.Models;
 public class User
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+
+    [Required]
+    [EmailAddress]
     public string Email { get; set; }
-    public string HasedPassword { get; set; }
+    public string HashedPassword { get; set; }
     public int Points { get; set; }
     public string ScreenName { get; set; }
     public string? Description { get; set; }
@@ -23,7 +29,7 @@ public class User
     Guid id,
     string name,
     string email,
-    string hasedPassword,
+    string hashedPassword,
     int points,
     string screenName,
     string description,
@@ -43,7 +49,7 @@ public class User
         Id = id;
         Name = name;
         Email = email;
-        HasedPassword = hasedPassword;
+        HashedPassword = hashedPassword;
         Points = points;
         ScreenName = screenName;
         Description = description;

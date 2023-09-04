@@ -4,7 +4,7 @@ public record UserResponse(
        Guid Id,
        string Name,
        string Email,
-       string HasedPassword,
+       string HashedPassword,
        int Points,
        string ScreenName,
        string Description,

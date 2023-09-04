@@ -51,7 +51,7 @@ public class UserController : ControllerBase
         user.Id,
         user.Name,
         user.Email,
-        user.HasedPassword,
+        user.HashedPassword,
         user.Points,
         user.ScreenName,
         user.Description,
@@ -81,5 +81,37 @@ public class UserController : ControllerBase
 
         return Ok(user);
     }
+    [HttpGet("email/{email}")]
+    public IActionResult GetUserByEmail(string email)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
+        if (user == null)
+        {
+            // User not found, return a 404 Not Found response
+            return NotFound();
+        }
+        var response = new UserResponse(
+               user.Id,
+               user.Name,
+               user.Email,
+               user.HashedPassword,
+               user.Points,
+               user.ScreenName,
+               user.Description ?? " ",
+               user.Protected,
+               user.Verified,
+               user.FollowersCount,
+               user.FriendsCount,
+               user.FavouritesCount,
+               user.StatusesCount,
+               user.CreatedAt,
+               user.ProfileBannerUrl,
+               user.ProfileImageUrlHttps,
+               user.DefaultProfile,
+               user.DefaultProfileImage
+           );
+        // Return a 200 OK response with the user data
+        return Ok(response);
+    }
 }
