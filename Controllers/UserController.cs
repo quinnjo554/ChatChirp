@@ -1,4 +1,5 @@
 
+using ChatChirp.Request.UserRequest;
 using ChatChirp.Data;
 using ChatChirp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +20,98 @@ public class UserController : ControllerBase
     }
 
 
-    [HttpGet(Name = "getAllUsers")]
-    public async Task<IActionResult> Get()
+    [HttpPost()]
+    public async Task<IActionResult> CreateUser(CreateUserRequest request)
     {
-        var user = new User()
-        {
-            Name = "",
-            Email = "",
-            Points = 32,
-        };
+        var user = new User(
+        Guid.NewGuid(),
+        request.Name,
+        request.Email,
+        request.HashedPassword,
+        request.Points,
+        request.ScreenName,
+        request.Description,
+        request.Protected,
+        request.Verified,
+        request.FollowersCount,
+        request.FriendsCount,
+        request.FavouritesCount,
+        request.StatusesCount,
+        DateTime.UtcNow,
+        request.ProfileBannerUrl,
+        request.ProfileImageUrlHttps,
+        request.DefaultProfile,
+        request.DefaultProfileImage
+    );
+
         _context.Add(user);
         await _context.SaveChangesAsync();
-        var allUsers = await _context.Users.ToListAsync();
-        return Ok(allUsers);
+
+        var response = new UserResponse(
+        user.Id,
+        user.Name,
+        user.Email,
+        user.HashedPassword,
+        user.Points,
+        user.ScreenName,
+        user.Description,
+        user.Protected,
+        user.Verified,
+        user.FollowersCount,
+        user.FriendsCount,
+        user.FavouritesCount,
+        user.StatusesCount,
+        user.CreatedAt,
+        user.ProfileBannerUrl,
+        user.ProfileImageUrlHttps,
+        user.DefaultProfile,
+        user.DefaultProfileImage
+    );
+        return CreatedAtAction(
+         actionName: nameof(GetUser),
+         routeValues: new { id = user.Id },
+         value: response
+        );
+    }
+
+    [HttpGet("{id:guid}")]
+    public IActionResult GetUser(Guid id)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+
+        return Ok(user);
+    }
+    [HttpGet("email/{email}")]
+    public IActionResult GetUserByEmail(string email)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Email == email);
+
+        if (user == null)
+        {
+            // User not found, return a 404 Not Found response
+            return NotFound();
+        }
+        var response = new UserResponse(
+               user.Id,
+               user.Name,
+               user.Email,
+               user.HashedPassword,
+               user.Points,
+               user.ScreenName,
+               user.Description ?? " ",
+               user.Protected,
+               user.Verified,
+               user.FollowersCount,
+               user.FriendsCount,
+               user.FavouritesCount,
+               user.StatusesCount,
+               user.CreatedAt,
+               user.ProfileBannerUrl,
+               user.ProfileImageUrlHttps,
+               user.DefaultProfile,
+               user.DefaultProfileImage
+           );
+        // Return a 200 OK response with the user data
+        return Ok(response);
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PvI6sTTasfB5Xl6hAqiXnqVal5YRpvrYaa3mpQesnwNR5m5NSWjtfpy8cLPMJz1r9DpRu5PIDzS8Ccf+wvXwvQ==",
+  "dgSpecHash": "B3s5D90kO3yIdqAITC/G/eE4hEKsGJ0jFZsuDNs985N+VA3ZOQCmt9FtxSY3A1wemfg0uw061D523IsNIxoEtg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
+  "projectFilePath": "c:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\quinn\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\quinn\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",

@@ -1481,11 +1481,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
+      "projectUniqueName": "c:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
       "projectName": "ChatChirp",
-      "projectPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
+      "projectPath": "c:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
       "packagesPath": "C:\\Users\\quinn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\obj\\",
+      "outputPath": "c:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

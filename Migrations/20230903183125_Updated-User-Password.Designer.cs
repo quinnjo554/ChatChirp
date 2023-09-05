@@ -3,6 +3,7 @@ using System;
 using ChatChirp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ChatChirp.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230903183125_Updated-User-Password")]
+    partial class UpdatedUserPassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace ChatChirp.Migrations
                     b.Property<int>("FriendsCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("HashedPassword")
+                    b.Property<string>("HasedPassword")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -86,9 +89,6 @@ namespace ChatChirp.Migrations
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });
