@@ -1,6 +1,7 @@
-namespace ChatChirp.Request.UserRequest;
+namespace ChatChirp.Requests.UserRequest;
 
-public record CreateUserRequest(
+public record UserResponse(
+       Guid Id,
        string Name,
        string Email,
        string HashedPassword,
@@ -11,7 +12,6 @@ public record CreateUserRequest(
        bool Verified,
        int FollowersCount,
        int FriendsCount,
-       int ListedCount,
        int FavouritesCount,
        int StatusesCount,
        DateTime CreatedAt,
@@ -20,4 +20,3 @@ public record CreateUserRequest(
        bool DefaultProfile,
        bool DefaultProfileImage
    );
-
