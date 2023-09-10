@@ -1,4 +1,4 @@
-namespace ChatChirp.Request.UserRequest;
+namespace ChatChirp.Requests.UserRequest;
 
 public record UpdateUserRequest(
        Guid Id,

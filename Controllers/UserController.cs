@@ -1,117 +1,75 @@
 
-using ChatChirp.Request.UserRequest;
+using ChatChirp.Requests.UserRequest;
 using ChatChirp.Data;
 using ChatChirp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ChatChirp.Services.User;
+using Microsoft.AspNetCore.Http.HttpResults;
+using ChatChirp.Exceptions.UserExceptions;
 
 namespace ChatChirp.Controllers;
-
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;
-    private readonly UserContext _context;
-    public UserController(ILogger<UserController> logger, UserContext context)
+    private readonly UserService _userService;
+
+    public UserController(ILogger<UserController> logger, UserService userService)
     {
         _logger = logger;
-        _context = context;
+        _userService = userService;
     }
-
 
     [HttpPost()]
     public async Task<IActionResult> CreateUser(CreateUserRequest request)
     {
-        var user = new User(
-        Guid.NewGuid(),
-        request.Name,
-        request.Email,
-        request.HashedPassword,
-        request.Points,
-        request.ScreenName,
-        request.Description,
-        request.Protected,
-        request.Verified,
-        request.FollowersCount,
-        request.FriendsCount,
-        request.FavouritesCount,
-        request.StatusesCount,
-        DateTime.UtcNow,
-        request.ProfileBannerUrl,
-        request.ProfileImageUrlHttps,
-        request.DefaultProfile,
-        request.DefaultProfileImage
-    );
-
-        _context.Add(user);
-        await _context.SaveChangesAsync();
-
-        var response = new UserResponse(
-        user.Id,
-        user.Name,
-        user.Email,
-        user.HashedPassword,
-        user.Points,
-        user.ScreenName,
-        user.Description,
-        user.Protected,
-        user.Verified,
-        user.FollowersCount,
-        user.FriendsCount,
-        user.FavouritesCount,
-        user.StatusesCount,
-        user.CreatedAt,
-        user.ProfileBannerUrl,
-        user.ProfileImageUrlHttps,
-        user.DefaultProfile,
-        user.DefaultProfileImage
-    );
-        return CreatedAtAction(
-         actionName: nameof(GetUser),
-         routeValues: new { id = user.Id },
-         value: response
-        );
+        try
+        {
+            var response = await _userService.CreateUser(request);
+            return CreatedAtAction(nameof(GetUser), new { id = response.Id }, response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating user");
+            return StatusCode(500, "Internal Server Error");
+        }
     }
 
     [HttpGet("{id:guid}")]
     public IActionResult GetUser(Guid id)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Id == id);
-
-        return Ok(user);
+        try
+        {
+            var response = _userService.GetUser(id);
+            return Ok(response);
+        }
+        catch (NotFoundException ex)
+        {
+            _logger.LogError(ex, "Error getting user by ID");
+            return StatusCode(404, "User not found");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting user by ID");
+            return StatusCode(500, "Internal Server Error");
+        }
     }
+
     [HttpGet("email/{email}")]
     public IActionResult GetUserByEmail(string email)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Email == email);
-
-        if (user == null)
+        try
         {
-            // User not found, return a 404 Not Found response
-            return NotFound();
+            var response = _userService.GetUserByEmail(email);
+            return Ok(response);
         }
-        var response = new UserResponse(
-               user.Id,
-               user.Name,
-               user.Email,
-               user.HashedPassword,
-               user.Points,
-               user.ScreenName,
-               user.Description ?? " ",
-               user.Protected,
-               user.Verified,
-               user.FollowersCount,
-               user.FriendsCount,
-               user.FavouritesCount,
-               user.StatusesCount,
-               user.CreatedAt,
-               user.ProfileBannerUrl,
-               user.ProfileImageUrlHttps,
-               user.DefaultProfile,
-               user.DefaultProfileImage
-           );
-        // Return a 200 OK response with the user data
-        return Ok(response);
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting user by email");
+            return StatusCode(500, "Internal Server Error");
+        }
     }
 }
