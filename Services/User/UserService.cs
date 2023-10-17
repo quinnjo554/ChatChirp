@@ -28,6 +28,11 @@ public class UserService
     {
         try
         {
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == request.Email);
+            if (existingUser != null)
+            {
+                throw new Exception("User with the same email already exists.");
+            }
             var user = new User(
                 Guid.NewGuid(),
                 request.Name,
@@ -48,7 +53,6 @@ public class UserService
                 request.DefaultProfile,
                 request.DefaultProfileImage
             );
-
             _context.Add(user);
             await _context.SaveChangesAsync();
 

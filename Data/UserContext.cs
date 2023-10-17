@@ -8,7 +8,7 @@ public class UserContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
-
+    public DbSet<Post> Posts { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configure the unique constraint on the Email property
