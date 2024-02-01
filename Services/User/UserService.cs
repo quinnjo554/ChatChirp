@@ -87,12 +87,7 @@ public class UserService
     {
         try
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == email);
-
-            if (user == null)
-            {
-                throw new Exception();
-            }
+            var user = _context.Users.FirstOrDefault(u => u.Email == email) ?? throw new Exception();
             var response = MapToUserResponse(user);
             return response;
         }
@@ -103,7 +98,7 @@ public class UserService
         }
     }
 
-    private UserResponse MapToUserResponse(User user)
+    private static UserResponse MapToUserResponse(User user)
     {
         return new UserResponse(
             user.Id,
