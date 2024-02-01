@@ -6,10 +6,8 @@ namespace ChatChirp.Models
     public class Post
     {
 
-        // Foreign key property for the User entity
         public Guid UserId { get; set; }
-        // Navigation property to the User entity
-        public Guid Id { get; set; } // Using long instead of Guid as Twitter IDs are long integers
+        public Guid Id { get; set; }
         public string Text { get; set; } // Represents the actual text of the status update
         public DateTime CreatedAt { get; set; }
         public string Source { get; set; }
