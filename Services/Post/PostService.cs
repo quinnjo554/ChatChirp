@@ -12,6 +12,7 @@ using System.Web;
 using Microsoft.AspNetCore.Http.HttpResults;
 using ChatChirp.Requests.PostRequest;
 using System.Net;
+using ChatChirp.Exceptions.UserExceptions;
 
 public class PostService
 {
@@ -60,13 +61,22 @@ public class PostService
     {
         try
         {
-            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == postId) ?? throw new Exception("");
+            var post = await _context.Posts
+                .Where(p => p.Id == postId)
+                .FirstOrDefaultAsync();
+
+            if (post == null)
+            {
+                _logger.LogInformation($"Post not found for ID: {postId}");
+                throw new NotFoundException($"Post not found for ID: {postId}");
+            }
+
             var response = MapToPostResponse(post);
             return response;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting post by ID");
+            _logger.LogError(ex, $"Error getting post by ID: {postId}");
             throw;
         }
     }
@@ -91,7 +101,8 @@ public class PostService
     {
         try
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == userId) ?? throw new Exception("");
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
             var posts = await _context.Posts.Where(p => p.UserId == userId).ToListAsync();
             var responses = posts.Select(MapToPostResponse).ToArray();
             return responses;

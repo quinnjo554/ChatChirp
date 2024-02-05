@@ -16,13 +16,12 @@ public class PostController : ControllerBase
 {
     private readonly ILogger<PostController> _logger;
     private readonly PostService _postService;
-    private readonly UserService _userService;
+
 
     public PostController(ILogger<PostController> logger, PostService postService, UserService userService)
     {
         _logger = logger;
         _postService = postService;
-        _userService = userService;
     }
 
     [HttpPost]
@@ -70,12 +69,12 @@ public class PostController : ControllerBase
         }
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetPostByUserId(Guid id)
+    [HttpGet("user/{UserId}")]
+    public async Task<IActionResult> GetPostByUserId(Guid UserId)
     {
         try
         {
-            var response = _postService.GetPostsByUserId(id);
+            var response = await _postService.GetPostsByUserId(UserId);
             return Ok(response);
         }
         catch (NotFoundException ex)
@@ -89,4 +88,5 @@ public class PostController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
+
 }
