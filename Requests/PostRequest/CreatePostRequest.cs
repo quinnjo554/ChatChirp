@@ -9,7 +9,6 @@ namespace ChatChirp.Requests.PostRequest
         long? InReplyToStatusId,
         string InReplyToScreenName,
         long? InReplyToUserId,
-        long LikeCount,
-        long Points
+        long LikeCount
     );
 }

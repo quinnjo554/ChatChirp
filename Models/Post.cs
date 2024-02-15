@@ -16,13 +16,13 @@ namespace ChatChirp.Models
         public string InReplyToScreenName { get; set; }
         public long? InReplyToUserId { get; set; }
         public long LikeCount { get; set; }
-        public long Points { get; set; }
+        public double Points { get; set; }
 
         // Constructor with parameters
         public Post(Guid id, string text, DateTime createdAt, string source, bool truncated,
                       long? inReplyToStatusId, string inReplyToScreenName, long? inReplyToUserId,
                       Guid userId, // Change the parameter to accept the User's Id
-                      long likeCount, long points)
+                      long likeCount, double points)
         {
             Id = id;
             Text = text;

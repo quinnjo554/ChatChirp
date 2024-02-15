@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using ChatChirp.Requests.PostRequest;
 using System.Net;
 using ChatChirp.Exceptions.UserExceptions;
+using Azure;
+using Azure.AI.TextAnalytics;
+using MLModel1_ConsoleApp1;
+using System.Threading.RateLimiting;
 
 public class PostService
 {
@@ -30,6 +34,7 @@ public class PostService
     {
         try
         {
+            double points = AnalyzeSentiment(request.Text);
             var User = _context.Posts.FirstOrDefault(u => u.UserId == request.UserId) ?? throw new Exception("User Not Found.");
             var post = new Post(
                 Guid.NewGuid(),
@@ -42,7 +47,7 @@ public class PostService
                 request.InReplyToUserId,
                 User.UserId,
                 request.LikeCount,
-                request.Points
+                points
             );
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
@@ -131,6 +136,40 @@ public class PostService
             post.Points
 
         );
+    }
+
+    public double AnalyzeSentiment(string text)
+    {
+        int mid = text.Length / 2;
+        string firstHalf = text[..mid];
+        string secondHalf = text[mid..];
+
+        double firstHalfPoints = AnalyzeText(firstHalf);
+
+        double secondHalfPoints = AnalyzeText(secondHalf);
+        Console.WriteLine(firstHalfPoints);
+        Console.WriteLine("\n " + secondHalfPoints);
+        return firstHalfPoints + secondHalfPoints;
+    }
+
+    private static double AnalyzeText(string text)
+    {
+        MLModel1.ModelInput sampleData = new MLModel1.ModelInput()
+        {
+            Text = $"@{text}",
+            Selected_text = $"@{text}",
+        };
+        var sentimentPrediction = MLModel1.Predict(sampleData);
+        float[] scores = sentimentPrediction.Score;
+        float negative = scores[1];
+        float positive = scores[2];
+        double points = sentimentPrediction.PredictedLabel switch
+        {
+            "negative" => -10 * negative,
+            "positive" => 10 * positive,
+            _ => 0,
+        };
+        return points;
     }
 
 }

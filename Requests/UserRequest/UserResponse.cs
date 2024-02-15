@@ -5,7 +5,7 @@ public record UserResponse(
        string Name,
        string Email,
        string HashedPassword,
-       int Points,
+       double Points,
        string ScreenName,
        string Description,
        bool Protected,
