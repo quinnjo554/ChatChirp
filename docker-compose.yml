@@ -18,6 +18,8 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=User ID=user;Password=secret;Server=app_db;Port=5432;Database=Chatchirp;IntegratedSecurity=true;Pooling=true;
       - ASPNETCORE_URLS=http://+:80
+    volumes: 
+      - C:/Users/quinn/Desktop/Code/Web/ChatChirp/ChatChirpBack/ChatChirp/ChatChirp/Services/Ai:/ChatChirp/Services/Ai
     networks:
       - dev
   app_db:

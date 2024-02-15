@@ -11,7 +11,7 @@ public class User
     [EmailAddress]
     public string Email { get; set; }
     public string HashedPassword { get; set; }
-    public int Points { get; set; }
+    public double Points { get; set; }
     public string ScreenName { get; set; }
     public string? Description { get; set; }
     public bool Protected { get; set; } = false;
@@ -30,7 +30,7 @@ public class User
     string name,
     string email,
     string hashedPassword,
-    int points,
+    double points,
     string screenName,
     string description,
     bool @protected,

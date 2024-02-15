@@ -42,8 +42,10 @@ public class UserController : ControllerBase
     {
         try
         {
+
             var response = _userService.GetUser(id);
             return Ok(response);
+
         }
         catch (NotFoundException ex)
         {

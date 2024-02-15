@@ -44,8 +44,8 @@ namespace ChatChirp.Migrations
                     b.Property<long>("LikeCount")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Points")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Points")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Source")
                         .IsRequired()
@@ -105,8 +105,8 @@ namespace ChatChirp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Points")
-                        .HasColumnType("integer");
+                    b.Property<double>("Points")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("ProfileBannerUrl")
                         .IsRequired()
