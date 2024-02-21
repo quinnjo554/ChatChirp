@@ -14,5 +14,5 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 COPY ./Services/Ai/MLModel1.mlnet ./Services/Ai/MLModel1.mlnet
-
+COPY ./Services/Ai/MLModel2.mlnet ./Services/Ai/MLModel2.mlnet
 ENTRYPOINT [ "dotnet", "ChatChirp.dll" ]

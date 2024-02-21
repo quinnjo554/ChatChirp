@@ -17,6 +17,8 @@ using Azure;
 using Azure.AI.TextAnalytics;
 using MLModel1_ConsoleApp1;
 using System.Threading.RateLimiting;
+using MLModel2_ConsoleApp2;
+using ChatChirp.Migrations;
 
 public class PostService
 {
@@ -138,35 +140,52 @@ public class PostService
         );
     }
 
-    public double AnalyzeSentiment(string text)
-    {
-        int mid = text.Length / 2;
-        string firstHalf = text[..mid];
-        string secondHalf = text[mid..];
 
-        double firstHalfPoints = AnalyzeText(firstHalf);
 
-        double secondHalfPoints = AnalyzeText(secondHalf);
-        Console.WriteLine(firstHalfPoints);
-        Console.WriteLine("\n " + secondHalfPoints);
-        return firstHalfPoints + secondHalfPoints;
-    }
 
-    private static double AnalyzeText(string text)
+
+    private static double AnalyzeSentiment(string text)
     {
         MLModel1.ModelInput sampleData = new MLModel1.ModelInput()
         {
             Text = $"@{text}",
             Selected_text = $"@{text}",
         };
+        double points = 0;
         var sentimentPrediction = MLModel1.Predict(sampleData);
         float[] scores = sentimentPrediction.Score;
         float negative = scores[1];
         float positive = scores[2];
+        if (sentimentPrediction.PredictedLabel == "negative" || sentimentPrediction.PredictedLabel == "neutral")
+        {
+            points = IsNegativeSentimentHate(text);
+        }
+        else
+        {
+            points = sentimentPrediction.PredictedLabel switch
+            {
+                "negative" => -10 * negative,
+                "positive" => 10 * positive,
+                _ => 0,
+            };
+        }
+        return points;
+    }
+
+
+    public static double IsNegativeSentimentHate(string text)
+    {
+        MLModel2.ModelInput sampleData = new MLModel2.ModelInput()
+        {
+            Tweet = $@"{text}",
+        };
+        var sentimentPrediction = MLModel2.Predict(sampleData);
+        float[] scores = sentimentPrediction.Score;
+
         double points = sentimentPrediction.PredictedLabel switch
         {
-            "negative" => -10 * negative,
-            "positive" => 10 * positive,
+            1 => -10 * scores[1],
+            0 => -100 * scores[2],
             _ => 0,
         };
         return points;
