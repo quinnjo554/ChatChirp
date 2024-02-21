@@ -169,7 +169,7 @@ public class PostService
                 _ => 0,
             };
         }
-        return points;
+        return Math.Round(points, 2);
     }
 
 
@@ -188,7 +188,7 @@ public class PostService
             0 => -100 * scores[2],
             _ => 0,
         };
-        return points;
+        return Math.Round(points, 2);
     }
 
 }
