@@ -37,7 +37,7 @@ public class PostService
         try
         {
             double points = AnalyzeSentiment(request.Text);
-            var User = _context.Posts.FirstOrDefault(u => u.UserId == request.UserId) ?? throw new Exception("User Not Found.");
+            var User = _context.Users.FirstOrDefault(u => u.Id == request.UserId) ?? throw new Exception("User Not Found.");
             var post = new Post(
                 Guid.NewGuid(),
                 request.Text,
@@ -47,9 +47,11 @@ public class PostService
                 request.InReplyToStatusId,
                 request.InReplyToScreenName,
                 request.InReplyToUserId,
-                User.UserId,
+                User.Id,
                 request.LikeCount,
-                points
+                points,
+                request.ContentLinkUrl,
+                request.VideoUrl
             );
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
@@ -125,6 +127,7 @@ public class PostService
     public static PostResponse MapToPostResponse(Post post)
     {
         return new PostResponse(
+
             post.Id,
             post.UserId,
             post.Text,
@@ -135,7 +138,9 @@ public class PostService
             post.InReplyToScreenName,
             post.InReplyToUserId,
             post.LikeCount,
-            post.Points
+            post.Points,
+            post.ContentLinkUrl,
+            post.VideoUrl
 
         );
     }
