@@ -11,6 +11,8 @@ namespace ChatChirp.Requests.PostRequest
         string InReplyToScreenName,
         long? InReplyToUserId,
         long LikeCount,
-        double Points
+        double Points,
+        string? ContentLinkUrl,
+        string? VideoUrl
     );
 }

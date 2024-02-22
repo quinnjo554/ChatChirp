@@ -17,12 +17,12 @@ namespace ChatChirp.Models
         public long? InReplyToUserId { get; set; }
         public long LikeCount { get; set; }
         public double Points { get; set; }
-
+        public string? ContentLinkUrl { get; set; }
+        public string? VideoUrl { get; set; }
         // Constructor with parameters
         public Post(Guid id, string text, DateTime createdAt, string source, bool truncated,
                       long? inReplyToStatusId, string inReplyToScreenName, long? inReplyToUserId,
-                      Guid userId, // Change the parameter to accept the User's Id
-                      long likeCount, double points)
+                      Guid userId, long likeCount, double points, string? contentLinkUrl, string? videoUrl)
         {
             Id = id;
             Text = text;
@@ -35,6 +35,8 @@ namespace ChatChirp.Models
             UserId = userId;
             LikeCount = likeCount;
             Points = points;
+            ContentLinkUrl = contentLinkUrl;
+            VideoUrl = videoUrl;
         }
 
     }
