@@ -123,6 +123,23 @@ public class PostService
         }
     }
 
+    public async Task<PostResponse> DeletePostByUserId(Guid postId)
+    {
+        try
+        {
+            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == postId) ?? throw new Exception("Post not found");
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
+            var response = MapToPostResponse(post);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting post by post ID");
+            throw;
+        }
+    }
 
     public static PostResponse MapToPostResponse(Post post)
     {

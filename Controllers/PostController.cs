@@ -39,6 +39,22 @@ public class PostController : ControllerBase
         }
     }
 
+    [HttpDelete("delete/{postId}")]
+    public async Task<IActionResult> DeletePost(Guid postId)
+    {
+        try
+        {
+            var response = await _postService.DeletePostByUserId(postId);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+
+            _logger.LogError(ex, "Error getting post");
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPost(Guid id)
     {
