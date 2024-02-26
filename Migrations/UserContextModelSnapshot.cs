@@ -22,13 +22,88 @@ namespace ChatChirp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ChatChirp.Models.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentLinkUrl")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("InReplyToScreenName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long?>("InReplyToStatusId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("InReplyToUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("LikeCount")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("Points")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Truncated")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("VideoUrl")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("ChatChirp.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("DefaultProfile")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("DefaultProfileImage")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("FavouritesCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FollowersCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FriendsCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("HashedPassword")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -36,10 +111,34 @@ namespace ChatChirp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Points")
+                    b.Property<double>("Points")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("ProfileBannerUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProfileImageUrlHttps")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Protected")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ScreenName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("StatusesCount")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Verified")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

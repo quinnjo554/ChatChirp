@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj": {}
+    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj": {
+    "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj",
+        "projectUniqueName": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
         "projectName": "ChatChirp",
-        "projectPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\ChatChirp.csproj",
+        "projectPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\ChatChirp.csproj",
         "packagesPath": "C:\\Users\\quinn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\chatchirp\\obj\\",
+        "outputPath": "C:\\Users\\quinn\\Desktop\\Code\\Web\\ChatChirp\\ChatChirpBack\\ChatChirp\\ChatChirp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Azure.AI.TextAnalytics": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.5, )"
@@ -53,6 +57,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.ML": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
